@@ -32,11 +32,12 @@ class PiHQCamera():
 
     def take_photo_and_save(self, file_path=None):
         self.picam2.stop()
-        self.config = self.picam2.create_still_configuration(main={"size": resolution})
+        self.config = self.picam2.create_still_configuration(main={"size": self.preset_resolution})
         self.picam2.configure(self.config)
         if file_path is None:
             file_path = f"{time.strftime('%Y%m%d_%H%M%S')}.png"
-        self.picam2.switch_mode_and_capture_file(self.config, file_path)
+        self.picam2.start()
+        #self.picam2.switch_mode_and_capture_file(self.config, file_path)
 
     def start_recording_video(self, video_path=None):
         self.picam2.stop()
