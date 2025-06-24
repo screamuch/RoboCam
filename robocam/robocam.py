@@ -2,6 +2,7 @@ import serial
 import serial.tools.list_ports
 import time
 import sys
+import re
 from picamera2 import Picamera2
 
 class RoboCam:
@@ -86,15 +87,15 @@ class RoboCam:
             time.sleep(0.1)
             
         position = {}
-        parts = response.split(" ")
-        for part in parts:
-            if ':' in part:
-                axis, value = part.split(":")
-                if axis not in position:
-                    try:
-                        position[axis] = float(value)
-                    except ValueError:
-                        continue
+        matches = re.findall(r'(X|Y|Z):([0-9.-]+)', response)
+        collected_axes = set()
+        for axis, value in matches:
+            try:
+                if axis not in collected_axes:
+                    position[axis] = float(value)
+                    collected_axes.add(axis)
+            except ValueError:
+                continue
                     
         # Save XYZ values on the Pi
         self.X = position.get('X', None)

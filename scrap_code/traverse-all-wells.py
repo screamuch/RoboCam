@@ -4,7 +4,6 @@ from robocam.robocam import RoboCam
 import time
 
 robocam = RoboCam(baudrate=115200)
-camera = PiHQCamera(resolution=(1280, 1024))
 
 robocam.home()
 
@@ -14,9 +13,6 @@ for index, loc in enumerate(path):
 	X, Y, Z = loc
 	robocam.move_absolute(X=X, Y=Y, Z=Z)
 	time.sleep(1) # to compensate for shakes
-    
-	photo_path = f"index-{index}_loc-{loc}_timestamp-{time.strftime('%Y%m%d_%H%M%S')}.png"
-	camera.take_photo_and_save(photo_path)
     
 	time.sleep(2)
     
