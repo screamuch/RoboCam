@@ -72,6 +72,8 @@ class CameraApp:
 
             # Schedule the next update
             self.root.after(30, self.update_preview)
+            
+            # Add crosshair/well outline here to aid with aim
 
     def on_close(self):
         self.running = False
