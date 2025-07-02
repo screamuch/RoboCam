@@ -16,7 +16,7 @@ picam2.configure(cam_config)
 
 robocam = RoboCam(baudrate=115200)
 
-photo_path = f"stills/imaged_A1A2_B1B2_and_so_on/still_timestamp-{time.strftime('%Y%m%d_%H%M%S')}.png"
+photo_path = f"stills/still_timestamp-{time.strftime('%Y%m%d_%H%M%S')}.png"
 
 excitation_light = Laser(21)
 excitation_light.switch(1)
